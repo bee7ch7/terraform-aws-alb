@@ -655,6 +655,12 @@ resource "aws_lb_listener" "frontend_http_tcp" {
       }
     }
   }
+  
+  lifecycle {
+    ignore_changes = [
+      default_action
+    ]
+  }
 
   tags = merge(
     var.tags,
@@ -749,6 +755,12 @@ resource "aws_lb_listener" "frontend_https" {
       type             = "forward"
       target_group_arn = aws_lb_target_group.main[lookup(default_action.value, "target_group_index", count.index)].id
     }
+  }
+  
+  lifecycle {
+    ignore_changes = [
+      default_action
+    ]
   }
 
   tags = merge(
