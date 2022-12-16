@@ -410,6 +410,12 @@ resource "aws_lb_listener_rule" "https_listener_rule" {
       }
     }
   }
+      
+  lifecycle {
+    ignore_changes = [
+      action
+    ]
+  }
 
   tags = merge(
     var.tags,
@@ -606,6 +612,12 @@ resource "aws_lb_listener_rule" "http_tcp_listener_rule" {
         values = condition.value["source_ips"]
       }
     }
+  }
+      
+  lifecycle {
+    ignore_changes = [
+      action
+    ]
   }
 
   tags = merge(
